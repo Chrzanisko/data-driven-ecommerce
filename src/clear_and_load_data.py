@@ -3,15 +3,42 @@ import os
 from sqlalchemy import create_engine
 
 def clean_orders(df):
+
+    date_format = '%Y-%m-%d %H:%M:%S'
+
+    date_colections = [
+        'order_purchase_timestamp',
+        'order_approved_at',
+        'order_delivered_carrier_date',
+        'order_delivered_customer_date',
+        'order_estimated_delivery_date'
+    ]
+
+    for col in date_colections:
+
+        df[col] = pd.to_datetime(df[col], format=date_format, errors='coerce')
+
     return df
 
 def clean_order_items(df):
+
+    df['shipping_limit_date'] = pd.to_datetime(
+        df['shipping_limit_date'],
+        format='%Y-%m-%d %H:%M:%S',
+        errors='coerce')
+
     return df
 
 def clean_products(df):
+
+    df['product_category_name'] = df['product_category_name'].fillna('Other')
+    df = df.dropna(subset=['product_weight_g','product_length_cm'])
+    df = df.fillna(0)
+
     return df
 
 def clean_customers(df):
+
     return df
 
 
@@ -21,6 +48,7 @@ def run_ingestion():
     db_path = os.path.join(base_dir, 'database', 'ecommerce.db')
     os.makedirs(os.path.join(base_dir, 'database'), exist_ok=True)
     engine = create_engine(f'sqlite:///{db_path}')
+
 
     files_to_load = {
         'orders': 'olist_orders_dataset.csv',
@@ -38,10 +66,15 @@ def run_ingestion():
 
 
     for table_name, file_name in files_to_load.items():
+
         df = pd.read_csv(os.path.join(data_dir, file_name))
 
         if table_name in clear:
             df = clear[table_name](df)
+
+        print(table_name.upper())
+        df.info()
+        print('-----')
 
         df.to_sql(table_name, engine, if_exists='replace', index=False)
 

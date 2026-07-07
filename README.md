@@ -71,7 +71,6 @@ The project follows a standard data science workflow:
 * **Seasonal Dependency:** November 2017 marks an absolute historical peak (nearly 1M BRL), proving that Black Friday promotions are a massive, singular driver for Olist's yearly revenue model.
 * **Market Maturity:** In 2018, the initial explosive growth transitioned into a stable, high-volume plateau, consistently generating between 850k and 1M BRL in monthly revenue.
 * **Data Boundary Optimization:** Trailing data from September and October 2018 was deliberately excluded from the analysis. These months contain incomplete tracking periods in the raw dataset, which would artificially distort the trend line downward. Cutting the timeline at August 2018 ensures data integrity.
-* **The Challenge:** The dataset reveals that São Paulo (SP) dominates the marketplace, driving 60-70% of all transactions. This extreme concentration creates a single point of failure (SPOF). Any regional disruption—such as freight strikes, severe weather, or infrastructure failures in SP—could immediately paralyze Olist's core operations and revenue streams.
 
 <img src="images/Monthly_Sales_Trend.png" width="800" />  
 
@@ -96,6 +95,7 @@ The project follows a standard data science workflow:
 * **Regional Disparities:** The economic core (SP, MG, PR) enjoys highly efficient logistics with median delivery times under 10–12 days. In contrast, northern and remote states (AP, RR, AM) face severe bottlenecks, with medians spiking to 20–30 days.
 * **High Volatility:** Remote regions suffer from extreme unpredictability (wider interquartile ranges), making delivery promises highly unreliable for customers in those areas.
 * **Volume-Driven Failures:** While major hubs like SP and RJ are fast on average, they experience a high absolute volume of severe outliers (orders stretching to 80+ days), highlighting a critical edge-case failure mode in high-density areas.
+* **The Challenge:** The dataset reveals that São Paulo (SP) dominates the marketplace, driving 60-70% of all transactions. This extreme concentration creates a single point of failure (SPOF). Any regional disruption—such as freight strikes, severe weather, or infrastructure failures in SP—could immediately paralyze Olist's core operations and revenue streams.
 * **Analytical Limitation:** Delivery times were measured end-to-end (purchase to delivery). A critical next step for the business would be to isolate courier transit time from internal merchant fulfillment speed to precisely target the root cause of these delays.
  
 <img src="images/Logistics_Performance.png" width="800" />

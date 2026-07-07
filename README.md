@@ -63,13 +63,15 @@ The project follows a standard data science workflow:
 
 ##  Key Findings
 *The following insights were derived from the analysis of the Olist e-commerce dataset:*
+
 ###  Part 1: Sales Performance & Commercial Structure
+
 ### 1.1 Monthly Sales Trend:
-* **Aggressive Expansion:** Throughout 2017, the platform demonstrated rapid market penetration, scaling monthly revenue predictably from **100k BRL** to over **600k BRL**.
-* **Seasonal Dependency:** November 2017 marks an absolute historical peak (nearly **1M BRL**), proving that Black Friday promotions are a massive, singular driver for Olist's yearly revenue model.
-* **Market Maturity:** In 2018, the initial explosive growth transitioned into a stable, high-volume plateau, consistently generating between **850k and 1M BRL** in monthly revenue.
+* **Aggressive Expansion:** Throughout 2017, the platform demonstrated rapid market penetration, scaling monthly revenue predictably from 100k BRL to over 600k BRL.
+* **Seasonal Dependency:** November 2017 marks an absolute historical peak (nearly 1M BRL), proving that Black Friday promotions are a massive, singular driver for Olist's yearly revenue model.
+* **Market Maturity:** In 2018, the initial explosive growth transitioned into a stable, high-volume plateau, consistently generating between 850k and 1M BRL in monthly revenue.
 * **Data Boundary Optimization:** Trailing data from September and October 2018 was deliberately excluded from the analysis. These months contain incomplete tracking periods in the raw dataset, which would artificially distort the trend line downward. Cutting the timeline at August 2018 ensures data integrity.
-* **The Challenge:** The dataset reveals that **São Paulo (SP)** dominates the marketplace, driving 60-70% of all transactions. This extreme concentration creates a **Single Point of Failure (SPOF)**. Any regional disruption—such as freight strikes, severe weather, or infrastructure failures in SP—could immediately paralyze Olist's core operations and revenue streams.
+* **The Challenge:** The dataset reveals that São Paulo (SP) dominates the marketplace, driving 60-70% of all transactions. This extreme concentration creates a single point of failure (SPOF). Any regional disruption—such as freight strikes, severe weather, or infrastructure failures in SP—could immediately paralyze Olist's core operations and revenue streams.
 
 <img src="images/Monthly_Sales_Trend.png" width="800" />  
 
@@ -91,17 +93,17 @@ The project follows a standard data science workflow:
 ### Part 2: Operational Efficiency & Logistics
 
 ### 2.1 Logistics Performance: 
-* **Regional Disparities:** The economic core (**SP**, **MG**, **PR**) enjoys highly efficient logistics with median delivery times under **10–12 days**. In contrast, northern and remote states (**AP**, **RR**, **AM**) face severe bottlenecks, with medians spiking to **20–30 days**.
+* **Regional Disparities:** The economic core (SP, MG, PR) enjoys highly efficient logistics with median delivery times under 10–12 days. In contrast, northern and remote states (AP, RR, AM) face severe bottlenecks, with medians spiking to 20–30 days.
 * **High Volatility:** Remote regions suffer from extreme unpredictability (wider interquartile ranges), making delivery promises highly unreliable for customers in those areas.
-* **Volume-Driven Failures:** While major hubs like **SP** and **RJ** are fast on average, they experience a high absolute volume of severe outliers (orders stretching to **80+ days**), highlighting a critical edge-case failure mode in high-density areas.
+* **Volume-Driven Failures:** While major hubs like SP and RJ are fast on average, they experience a high absolute volume of severe outliers (orders stretching to 80+ days), highlighting a critical edge-case failure mode in high-density areas.
 * **Analytical Limitation:** Delivery times were measured end-to-end (purchase to delivery). A critical next step for the business would be to isolate courier transit time from internal merchant fulfillment speed to precisely target the root cause of these delays.
  
 <img src="images/Logistics_Performance.png" width="800" />
 
 ### 2.2 Freight vs. Product Value:
-* **Inelastic Freight Rates:** The analysis reveals that shipping fees are rigid, staying locked around **15-22 BRL** regardless of item cost. This suggests weight, volume, or baseline postal contracts dictate logistics pricing rather than product category retail value.
-* **The Premium Margin Leader:** `Watches Gifts` showcases peak operational efficiency, hitting a maximum average product value of **200 BRL** while maintaining an incredibly low shipping cost. It stands out as Olist's most profitable category relative to weight/size constraints.
-* **Logistics Friction in Low-Cost Sectors:** In categories like `Telephony`, fixed freight rates constitute over **21% of the total customer expense**. This high logistics-to-value ratio represents a prime drop-off risk at the checkout phase.
+* **Inelastic Freight Rates:** The analysis reveals that shipping fees are rigid, staying locked around 15-22 BRL regardless of item cost. This suggests weight, volume, or baseline postal contracts dictate logistics pricing rather than product category retail value.
+* **The Premium Margin Leader:** `Watches Gifts` showcases peak operational efficiency, hitting a maximum average product value of 200 BRL while maintaining an incredibly low shipping cost. It stands out as Olist's most profitable category relative to weight/size constraints.
+* **Logistics Friction in Low-Cost Sectors:** In categories like `Telephony`, fixed freight rates constitute over 21% of the total customer expense. This high logistics-to-value ratio represents a prime drop-off risk at the checkout phase.
   
 <img src="images/Freight_vs_Product_Value.png" width="800" />
 
@@ -109,7 +111,7 @@ The project follows a standard data science workflow:
 
 * **Logistics Dictates Retention:** The analysis reveals a brutal truth: shipping duration completely drives customer ratings. Satisfaction remains high only when fulfillment operates within tight operational windows.
 * **The 14-Day Psychological Boundary:** Customer sentiment remains relatively positive up to the 14-day mark (~10.6 days for 5-stars, ~14.2 days for 3-stars). This 2-week period represents the maximum tolerance threshold for the average user.
-* **The Three-Week Collapse:** When delivery times breach the threshold and shoot up to **21.2 days**, customer satisfaction plummets to a `1-star` rating. Delays of this magnitude represent Olist's primary risk factor for negative reviews.
+* **The Three-Week Collapse:** When delivery times breach the threshold and shoot up to 21.2 days, customer satisfaction plummets to a 1-star rating. Delays of this magnitude represent Olist's primary risk factor for negative reviews.
 * **Operational Strategy:** To protect platform growth, Olist should implement automated alerts for shipments crossing the 14-day threshold in transit. Optimizing fulfillment for these delayed lanes is the fastest way to improve overall marketplace loyalty.
   
 <img src="images/Delivery.png" width="800" />

@@ -38,7 +38,8 @@ def clean_products(df):
     return df
 
 def clean_customers(df):
-
+    df['customer_zip_code_prefix'] = df['customer_zip_code_prefix'].astype(str)
+    df['customer_zip_code_prefix'] = df['customer_zip_code_prefix'].str.zfill(5)
     return df
 
 
@@ -75,6 +76,9 @@ def run_ingestion():
         print(table_name.upper())
         df.info()
         print('-----')
+
+        duplicates = df.duplicated().sum()
+        print(f"Duplicates: {duplicates}\n-----")
 
         df.to_sql(table_name, engine, if_exists='replace', index=False)
 

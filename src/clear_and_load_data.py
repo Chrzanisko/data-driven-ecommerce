@@ -5,14 +5,14 @@ from sqlalchemy import create_engine
 
 def clean_orders(df):
     date_format = '%Y-%m-%d %H:%M:%S'
-    date_colections = [
+    date_collection = [
         'order_purchase_timestamp',
         'order_approved_at',
         'order_delivered_carrier_date',
         'order_delivered_customer_date',
         'order_estimated_delivery_date'
     ]
-    for col in date_colections:
+    for col in date_collection:
         df[col] = pd.to_datetime(df[col], format=date_format, errors='coerce')
     return df
 
